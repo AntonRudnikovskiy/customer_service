@@ -1,1 +1,1 @@
-rootProject.name = "parsing_service"
+rootProject.name = "ParsingService"
