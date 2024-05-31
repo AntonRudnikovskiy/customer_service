@@ -1,13 +1,12 @@
-package meetnbot.parsing_service;
+package sentinelguardcustomer_service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ParsingServiceApplicationTests {
+class CustomerServiceApplicationTests {
 
     @Test
     void contextLoads() {
     }
-
 }

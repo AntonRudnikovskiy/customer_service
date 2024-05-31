@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://51.250.6.171/postgres
+    url: jdbc:postgresql://localhost:5432/postgres
     username: user
     password: password
 
@@ -16,13 +16,13 @@ spring:
         jdbc:
           batch_size: 10
 
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
   kafka:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: group
-
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
 
 server:
   port: 8087

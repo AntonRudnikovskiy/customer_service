@@ -1,3 +1,5 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/user_V001__initial
+      file: db/changelog/changeset/V001__customer.sql
+  - include:
+      file: db/changelog/changeset/V002__customer_id_sequence.sql
