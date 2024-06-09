@@ -35,6 +35,9 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.0.2")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.kafka:spring-kafka")
+    implementation("org.springframework.boot:spring-boot-starter-actuator:3.1.5")
+    implementation("io.micrometer:micrometer-tracing-bridge-brave:1.0.2")
+    implementation("io.zipkin.reporter2:zipkin-reporter-brave:2.16.3")
 
     /**
      * Database
@@ -42,7 +45,6 @@ dependencies {
     implementation("org.liquibase:liquibase-core")
     implementation("redis.clients:jedis:4.3.2")
     runtimeOnly("org.postgresql:postgresql")
-
 
     /**
      * Utils & Logging
