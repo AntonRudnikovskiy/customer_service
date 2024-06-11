@@ -3,12 +3,13 @@ package sentinelguardcustomer_service.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import sentinelguardcustomer_service.config.FraudClient;
-import sentinelguardcustomer_service.config.NotificationClient;
+import sentinelguardcustomer_service.config.amqp.RabbitMQueue;
+import sentinelguardcustomer_service.config.client.FraudClient;
 import sentinelguardcustomer_service.dto.CustomerNotificationRequest;
 import sentinelguardcustomer_service.dto.CustomerRegistrationRequest;
 import sentinelguardcustomer_service.dto.FraudCheckResponse;
 import sentinelguardcustomer_service.entity.Customer;
+import sentinelguardcustomer_service.message.producer.NotificationProducer;
 import sentinelguardcustomer_service.repository.CustomerRepository;
 
 import java.time.LocalDateTime;
@@ -19,7 +20,8 @@ import java.time.LocalDateTime;
 public class CustomerService {
     private final CustomerRepository customerRepository;
     private final FraudClient fraudClient;
-    private final NotificationClient notificationClient;
+    private final NotificationProducer rabbitMQMessageProducer;
+    private final RabbitMQueue rabbitMQueue;
 
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -34,12 +36,15 @@ public class CustomerService {
         if (fraudster.isFraudster()) {
             throw new IllegalStateException("fraudster");
         }
-        notificationClient.saveNotification(new CustomerNotificationRequest(
+
+        CustomerNotificationRequest payload = new CustomerNotificationRequest(
                 "",
                 customer.getLastName(),
                 LocalDateTime.now(),
                 customer.getEmail(),
-                customer.getId()
-        ));
+                customer.getId());
+
+        rabbitMQMessageProducer.publish(payload, rabbitMQueue.getInternalExchange(),
+                rabbitMQueue.getInternalNotificationRoutingKey());
     }
 }

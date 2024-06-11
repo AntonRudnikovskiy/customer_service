@@ -1,4 +1,4 @@
-package sentinelguardcustomer_service.config;
+package sentinelguardcustomer_service.config.rest;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

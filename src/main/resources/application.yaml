@@ -20,14 +20,11 @@ spring:
         format_sql: true
         jdbc:
           batch_size: 10
+  rabbitmq:
+    addresses: localhost:5672
 
   liquibase:
     change-log: classpath:db/changelog/db.changelog-master.yaml
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: group
 
 eureka:
   client:
@@ -55,3 +52,11 @@ management:
         http:
           server:
             requests: true
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queue:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key

@@ -1,4 +1,4 @@
-package sentinelguardcustomer_service.config;
+package sentinelguardcustomer_service.config.client;
 
 import io.micrometer.observation.annotation.Observed;
 import org.springframework.cloud.openfeign.FeignClient;
