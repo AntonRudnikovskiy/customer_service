@@ -3,6 +3,7 @@ package sentinelguardcustomer_service.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sentinelguardcustomer_service.config.amqp.RabbitMQueue;
 import sentinelguardcustomer_service.config.client.FraudClient;
 import sentinelguardcustomer_service.dto.CustomerNotificationRequest;
@@ -23,6 +24,7 @@ public class CustomerService {
     private final NotificationProducer rabbitMQMessageProducer;
     private final RabbitMQueue rabbitMQueue;
 
+    @Transactional
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
                 .firstName(request.firstName())
